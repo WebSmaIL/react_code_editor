@@ -1,33 +1,16 @@
-import React, { useState } from 'react';
-import CodeMirror from '@uiw/react-codemirror';
-import { javascript } from '@codemirror/lang-javascript';
-import { ViewUpdate } from '@codemirror/view';
-import { dracula } from "@uiw/codemirror-theme-dracula"
+import React, { useState } from "react";
+import Editor from "./components/Editor/Editor";
+import styled from "styled-components";
 
-function App() {
-  const [code, setCode] = useState<string | undefined>(undefined)
-  const onChange = React.useCallback((value: string, viewUpdate: ViewUpdate) => {
-    setCode(value)
-  }, []);
-
-  const runCode = () => {
-    if (code) {
-      const newFunc = new Function(code)
-      console.log(newFunc())
-    }
-  }
+const App = () => {
   return (
-    <>
-      <CodeMirror
-        value="console.log('hello world!');"
-        height="400px"
-        width="400px"
-        extensions={[javascript({ jsx: true })]}
-        onChange={onChange}
-        theme={dracula}
-      />
-      <button onClick={runCode}>run</button>
-    </>
+    <MainWrapper>
+      <Editor />
+    </MainWrapper>
   );
-}
+};
 export default App;
+
+const MainWrapper = styled.main`
+  background: #fff;
+`
